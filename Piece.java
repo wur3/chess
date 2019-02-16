@@ -10,5 +10,16 @@ public abstract class Piece {
   }
 
   //specified by each piece type
-  abstract void move(int x, int y);
+  public abstract void move(int x, int y);
+
+  //Accessors
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
+  }
+
+
 }
