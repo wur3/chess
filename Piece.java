@@ -1,7 +1,7 @@
 public abstract class Piece {
   //instance variables
-  private int x;
-  private int y;
+  protected int x;
+  protected int y;
 
   //constructor
   public Piece(int x, int y) {
