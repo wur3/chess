@@ -19,4 +19,13 @@ public class Square {
     occupied = false;
     piece = null;
   }
+
+  //Accessors
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
+  }
 }
