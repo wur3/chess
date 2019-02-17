@@ -16,7 +16,7 @@ public class Pawn extends Piece{
 
   @Override
   public void move(int x, int y) {
-    if (x == this.x && y = this.y + 1) {
+    if (x == this.x && y == this.y + 1) {
       this.y = y;
     }
     return;
