@@ -15,7 +15,7 @@ public class Board {
     }
   }
 
-  public void print_board() {
+  public void print_xy() {
     for (int i = 0; i < BOARD_HEIGHT; i++) {
       for (int j = 0; j < BOARD_WIDTH; j++) {
         System.out.print("[" + board[i][j].getX() + "," + board[i][j].getY() +"]   ");
