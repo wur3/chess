@@ -9,4 +9,14 @@ public class Square {
     this.x = x;
     this.y = y;
   }
+
+  public void place(Piece p) {
+    occupied = true;
+    piece = p;
+  }
+
+  public void remove() {
+    occupied = false;
+    piece = null;
+  }
 }
