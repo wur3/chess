@@ -5,9 +5,17 @@ public class Square {
 
   private int x, y;
 
+  //constructor
   public Square(int x, int y) {
     this.x = x;
     this.y = y;
+  }
+
+  //overloaded constructor
+  public Square(int x, int y, Piece p) {
+    this.x = x;
+    this.y = y;
+    place(p);
   }
 
   public void place(Piece p) {
