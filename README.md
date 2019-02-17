@@ -1,6 +1,6 @@
 # chess
 
-> An opportunity to practice object-oriented programming by implementing chess
+> I'm giving myself the chance to practice object-oriented programming by implementing chess
 
 ## Tutorial (i n c o m p l e t e)
 
