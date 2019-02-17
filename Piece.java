@@ -2,7 +2,7 @@ public abstract class Piece {
   //instance variables
   protected int x;
   protected int y;
-  protected Boolean moved = False;
+  protected boolean moved = false;
 
   //constructor
   public Piece(int x, int y) {

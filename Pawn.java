@@ -1,6 +1,6 @@
 public class Pawn extends Piece{
 
-  private Boolean doubleMoved = False;
+  private boolean doubleMoved = false;
 
   public Pawn(int x, int y) {
     super(x,y);
