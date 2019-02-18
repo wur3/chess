@@ -28,5 +28,8 @@ public abstract class Piece {
     return color;
   }
 
+  public String toString() {
+    return String.format("%s(%d,%d)",getClass(),x,y);
+  }
 
 }

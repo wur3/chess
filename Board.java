@@ -10,9 +10,21 @@ public class Board {
     board = new Square[BOARD_HEIGHT][BOARD_HEIGHT];
     for (int i = 0; i < BOARD_HEIGHT; i++) {
       for (int j = 0; j < BOARD_WIDTH; j++) {
-        board[i][j] = new Square(j, BOARD_HEIGHT-1-i);
+        board[i][j] = new Square(j, i);
       }
     }
+  }
+
+  public void place(Piece p, int x, int y) {
+    board[y][x].place(p);
+  }
+
+  public void clear(int x, int y) {
+    board[y][x].remove();
+  }
+
+  public Piece piece_at(int x, int y) {
+    return board[y][x].getPiece();
   }
 
   public void print_xy() {

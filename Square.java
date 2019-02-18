@@ -19,13 +19,23 @@ public class Square {
   }
 
   public void place(Piece p) {
-    occupied = true;
-    piece = p;
+    if (!occupied) {
+      occupied = true;
+      piece = p;
+    }
+    else {
+      System.out.println(String.format("(%d, %d) is already occupied!", x, y));
+    }
   }
 
   public void remove() {
-    occupied = false;
-    piece = null;
+    if (occupied) {
+      occupied = false;
+      piece = null;
+    }
+    else {
+      System.out.println(String.format("(%d, %d) is already empty!", x, y));
+    }
   }
 
   //Accessors
@@ -35,5 +45,13 @@ public class Square {
 
   public int getY() {
     return y;
+  }
+
+  public boolean getOccupied() {
+    return occupied;
+  }
+
+  public Piece getPiece() {
+    return piece;
   }
 }
