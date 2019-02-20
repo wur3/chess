@@ -37,7 +37,8 @@ public abstract class Piece {
   }
 
   //helper
-  protected boolean vertical_path(int x1, int y1, int x2, int y2, Board b) {
+  //1. vertical move
+  protected boolean vertical_path(int x1, int y1, int y2, Board b) {
     int high = (y1 >= y2) ? y1 : y2;
     int low = (y1 < y2) ? y1 : y2;
     for (int i = low + 1; i < high; i++) {
@@ -49,8 +50,18 @@ public abstract class Piece {
     return true;
   }
 
-
   //2. horizontal move
+  protected boolean horizontal_path(int x1, int y1, int x2, Board b) {
+    int high = (x1 >= x2) ? x1 : x2;
+    int low = (x1 < x2) ? x1 : x2;
+    for (int i = low + 1; i < high; i++) {
+      if (b.occupied_at(i,y1)) {  //fails if any square is occupied
+        System.out.println("Path blocked");
+        return false;
+      }
+    }
+    return true;
+  }
   //3. diagonal move
 
 }
