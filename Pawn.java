@@ -21,26 +21,24 @@ public class Pawn extends Piece{
 
   @Override
   public void move(int x, int y) {
-    //if pawn stays in the same column
-    if (x == this.x) {
-      //if pawn moves up by 1 or 2
-      if ((y == this.y + 1) || (!moved && y == this.y + 2)) {
-        //if new position isn't occupied
-        if (vertical_path(this.x, this.y, x, y, b)) {
-          justDoubleMoved = (y == this.y + 1) ? false : true;
-          moved = true;
+    //if pawn doesn't stay in the same column
+    if (x != this.x) {
+      System.out.println("Pawns can't move like that on x-axis!");
+      System.out.println(String.format("(%d,%d) to (%d,%d)",this.x,this.y,x,y));
+    }
+    //if pawn moves up by 1 or 2
+    else if ((y == this.y + 1) || (!moved && y == this.y + 2)) {
+      //if new position isn't occupied
+      if (vertical_path(this.x, this.y, y, b)) {
+        justDoubleMoved = (y == this.y + 1) ? false : true;
+        moved = true;
 
-          b.clear(this.x, this.y); //move piece off of old position of board
-          this.y = y; //update piece's own position
-          b.place(this, this.x, this.y); //move piece onto new position of board
-        }
-
-      } else {
-        System.out.println("Pawns can't move like that on y-axis!");
-        System.out.println(String.format("(%d,%d) to (%d,%d)",this.x,this.y,x,y));
+        b.clear(this.x, this.y); //move piece off of old position of board
+        this.y = y; //update piece's own position
+        b.place(this, this.x, this.y); //move piece onto new position of board
       }
     } else {
-      System.out.println("Pawns can't move like that on x-axis!");
+      System.out.println("Pawns can't move like that on y-axis!");
       System.out.println(String.format("(%d,%d) to (%d,%d)",this.x,this.y,x,y));
     }
   }
