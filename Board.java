@@ -27,6 +27,10 @@ public class Board {
     return board[BOARD_HEIGHT-1-y][x].getPiece();
   }
 
+  public boolean occupied_at(int x, int y) {
+    return board[BOARD_HEIGHT-1-y][x].getOccupied();
+  }
+
   public void print_xy() {
     for (int i = 0; i < BOARD_HEIGHT; i++) {
       for (int j = 0; j < BOARD_WIDTH; j++) {
