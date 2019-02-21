@@ -7,8 +7,12 @@ public class Pawn extends Piece{
   }
 
   public void capture(int x, int y) {
-    moved = true;
-    justDoubleMoved = false;
+    /** LEAVE UNTIL BISHOP MOVE IS DONE
+    if (diagonal_path(this.x, this.y, x, y)) {
+      moved = true;
+      justDoubleMoved = false;
+    }
+    **/
   }
 
   public void en_passant(int x, int y) {
