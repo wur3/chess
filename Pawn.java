@@ -7,9 +7,10 @@ public class Pawn extends Piece{
   }
 
   public void capture(int x, int y) {
-
-    moved = true;
-    justDoubleMoved = false;
+    if (vertical_path(this.x, this.y, y, b)) {
+      moved = true;
+      justDoubleMoved = false;
+    }
   }
 
   public void en_passant(int x, int y) {
@@ -31,11 +32,8 @@ public class Pawn extends Piece{
       //if new position isn't occupied
       if (vertical_path(this.x, this.y, y, b)) {
         justDoubleMoved = (y == this.y + 1) ? false : true;
-        moved = true;
 
-        b.clear(this.x, this.y); //move piece off of old position of board
-        this.y = y; //update piece's own position
-        b.place(this, this.x, this.y); //move piece onto new position of board
+      atomic_move(x,y);
       }
     } else {
       System.out.println("Pawns can't move like that on y-axis!");
