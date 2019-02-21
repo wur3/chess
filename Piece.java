@@ -37,6 +37,15 @@ public abstract class Piece {
   }
 
   //helper
+  protected void atomic_move(int x, int y) {
+    b.clear(this.x, this.y); //move piece off of old position of board
+    b.place(this, x, y); //move piece onto new position of board
+    //update piece's own position
+    this.x = x;
+    this.y = y;
+    moved = true;
+  }
+  
   //1. vertical move
   protected boolean vertical_path(int x1, int y1, int y2, Board b) {
     int high = (y1 >= y2) ? y1 : y2;
@@ -63,18 +72,18 @@ public abstract class Piece {
     return true;
   }
   //3. diagonal move
-  protected boolean diagonal_path(int x1, int y1, int x2, Board b) {
+  protected boolean diagonal_path(int x1, int y1, int x2, int y2, Board b) {
     int high_x = (x1 >= x2) ? x1 : x2;
     int low_x = (x1 < x2) ? x1 : x2;
     int high_y = (y1 >= y2) ? y1 : y2;
     int low_y = (y1 < y2) ? y1 : y2;
 
     if( high_x - low_x != high_y - low_y) { //not a diagonal path
-      System.out.println("This path is not diagonal.")
+      System.out.println("This path is not diagonal.");
       return false;
     }
 
-    for (int x_i = low_x + 1, int y_i = low_y + 1; x_i < high_x; x_i++, y_i++) {
+    for (int x_i = low_x + 1, y_i = low_y + 1; x_i < high_x; x_i++, y_i++) {
       if (b.occupied_at(x_i,y_i)) {  //fails if any square is occupied
         System.out.println("Path blocked");
         return false;
