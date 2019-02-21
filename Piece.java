@@ -63,5 +63,23 @@ public abstract class Piece {
     return true;
   }
   //3. diagonal move
+  protected boolean diagonal_path(int x1, int y1, int x2, Board b) {
+    int high_x = (x1 >= x2) ? x1 : x2;
+    int low_x = (x1 < x2) ? x1 : x2;
+    int high_y = (y1 >= y2) ? y1 : y2;
+    int low_y = (y1 < y2) ? y1 : y2;
 
+    if( high_x - low_x != high_y - low_y) { //not a diagonal path
+      System.out.println("This path is not diagonal.")
+      return false;
+    }
+
+    for (int x_i = low_x + 1, int y_i = low_y + 1; x_i < high_x; x_i++, y_i++) {
+      if (b.occupied_at(x_i,y_i)) {  //fails if any square is occupied
+        System.out.println("Path blocked");
+        return false;
+      }
+    }
+    return true;
+  }
 }
