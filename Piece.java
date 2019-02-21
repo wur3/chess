@@ -73,21 +73,24 @@ public abstract class Piece {
   }
 
   @return whether the diagonal path from (x1, y1) to (x2, y2) is completely unoccupied (excluding the start point)
-  protected Boolean diagonal_path(int x1, int y1, int x2, int y2) {
+  protected boolean diagonal_path(int x1, int y1, int x2, int y2) {
     int x_inc = (x1 < x2) ? 1 : -1;
     int y_inc = (y1 < y2) ? 1 : -1;
-
-    //MOVE THIS TO BEFORE THE FUNCTION GETS CALLED
-    if( Math.abs(x1 - x2) != Math.abs(y1 - y2)) { //not a diagonal path
-      System.out.println("This path is not diagonal.");
-      return null;
-    }
 
     for (int x_i = x1, y_i = y1; x_i <= x2; x_i += x_inc, y_i += y_inc) {
       if (b.occupied_at(x_i,y_i)) {  //fails if any square is occupied
         System.out.println("Diagonal path blocked");
         return false;
       }
+    }
+    return true;
+  }
+
+  @return whether (x1, y1) to (x2, y2) is a diagonal path
+  protected boolean is_diagonal (int x1, int y1, int x2, int y2){
+    if( Math.abs(x1 - x2) != Math.abs(y1 - y2)) { //not a diagonal path
+      System.out.println("This path is not diagonal.");
+      return false;
     }
     return true;
   }
