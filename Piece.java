@@ -1,3 +1,5 @@
+import Java.lang.Math;
+
 public abstract class Piece {
   //instance variables
   protected Board b;
@@ -46,12 +48,11 @@ public abstract class Piece {
     moved = true;
   }
 
-  //1. vertical move
-  protected boolean vertical_path(int x1, int y1, int y2) {
-    int high = (y1 >= y2) ? y1 : y2;
-    int low = (y1 < y2) ? y1 : y2;
-    for (int i = low + 1; i <= high; i++) {
-      if (b.occupied_at(x1,i)) {  //fails if any square is occupied
+  @return whether the path from (x, y1) to (x, y2) is completely unoccupied (excluding the start point)
+  protected boolean vertical_path(int x, int y1, int y2) {
+    int inc = (y1 < y2) ? 1 : -1;
+    for (int i = y1; i != y2; i += inc) {
+      if (b.occupied_at(x,i)) {  //fails if any square is occupied
         System.out.println("Path blocked");
         return false;
       }
@@ -59,33 +60,32 @@ public abstract class Piece {
     return true;
   }
 
-  //2. horizontal move
-  protected boolean horizontal_path(int x1, int y1, int x2) {
-    int high = (x1 >= x2) ? x1 : x2;
-    int low = (x1 < x2) ? x1 : x2;
-    for (int i = low + 1; i <= high; i++) {
-      if (b.occupied_at(i,y1)) {  //fails if any square is occupied
+  @return whether the path from (x1, y) to (x2, y) is completely unoccupied (excluding the start point)
+  protected boolean horizontal_path(int x1, int y, int x2) {
+    int inc = (x1 < x2) ? 1 : -1;
+    for (int i = x1; i != x2; i += inc) {
+      if (b.occupied_at(i,y)) {  //fails if any square is occupied
         System.out.println("Path blocked");
         return false;
       }
     }
     return true;
   }
-  //3. diagonal move
+
+  @return whether the diagonal path from (x1, y1) to (x2, y2) is completely unoccupied (excluding the start point)
   protected Boolean diagonal_path(int x1, int y1, int x2, int y2) {
-    int high_x = (x1 >= x2) ? x1 : x2;
-    int low_x = (x1 < x2) ? x1 : x2;
-    int high_y = (y1 >= y2) ? y1 : y2;
-    int low_y = (y1 < y2) ? y1 : y2;
+    int x_inc = (x1 < x2) ? 1 : -1;
+    int y_inc = (y1 < y2) ? 1 : -1;
 
-    if( high_x - low_x != high_y - low_y) { //not a diagonal path
+    //MOVE THIS TO BEFORE THE FUNCTION GETS CALLED
+    if( Math.abs(x1 - x2) != Math.abs(y1 - y2)) { //not a diagonal path
       System.out.println("This path is not diagonal.");
       return null;
     }
 
-    for (int x_i = low_x + 1, y_i = low_y + 1; x_i <= high_x; x_i++, y_i++) {
+    for (int x_i = x1, y_i = y1; x_i <= x2; x_i += x_inc, y_i += y_inc) {
       if (b.occupied_at(x_i,y_i)) {  //fails if any square is occupied
-        System.out.println("Path blocked");
+        System.out.println("Diagonal path blocked");
         return false;
       }
     }
