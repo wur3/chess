@@ -6,7 +6,8 @@ public class Main {
     Pawn p1 = new Pawn(board,1,2,"black");
     //System.out.println(board.piece_at(1,2));
     Pawn p2 = new Pawn(board, 1,3,"black");
-    
+    p1.move(1,3);
+
 
 
 
