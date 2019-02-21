@@ -50,7 +50,7 @@ public abstract class Piece {
   protected boolean vertical_path(int x1, int y1, int y2) {
     int high = (y1 >= y2) ? y1 : y2;
     int low = (y1 < y2) ? y1 : y2;
-    for (int i = low + 1; i < high; i++) {
+    for (int i = low + 1; i <= high; i++) {
       if (b.occupied_at(x1,i)) {  //fails if any square is occupied
         System.out.println("Path blocked");
         return false;
@@ -63,7 +63,7 @@ public abstract class Piece {
   protected boolean horizontal_path(int x1, int y1, int x2) {
     int high = (x1 >= x2) ? x1 : x2;
     int low = (x1 < x2) ? x1 : x2;
-    for (int i = low + 1; i < high; i++) {
+    for (int i = low + 1; i <= high; i++) {
       if (b.occupied_at(i,y1)) {  //fails if any square is occupied
         System.out.println("Path blocked");
         return false;
@@ -72,7 +72,7 @@ public abstract class Piece {
     return true;
   }
   //3. diagonal move
-  protected boolean diagonal_path(int x1, int y1, int x2, int y2) {
+  protected Boolean diagonal_path(int x1, int y1, int x2, int y2) {
     int high_x = (x1 >= x2) ? x1 : x2;
     int low_x = (x1 < x2) ? x1 : x2;
     int high_y = (y1 >= y2) ? y1 : y2;
@@ -80,10 +80,10 @@ public abstract class Piece {
 
     if( high_x - low_x != high_y - low_y) { //not a diagonal path
       System.out.println("This path is not diagonal.");
-      return false;
+      return null;
     }
 
-    for (int x_i = low_x + 1, y_i = low_y + 1; x_i < high_x; x_i++, y_i++) {
+    for (int x_i = low_x + 1, y_i = low_y + 1; x_i <= high_x; x_i++, y_i++) {
       if (b.occupied_at(x_i,y_i)) {  //fails if any square is occupied
         System.out.println("Path blocked");
         return false;
