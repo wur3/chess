@@ -7,10 +7,12 @@ public class Pawn extends Piece{
   }
 
   public void capture(int x, int y) {
-    if (vertical_path(this.x, this.y, y, b)) {
+    /** LEAVE UNTIL BISHOP MOVE IS DONE
+    if (diagonal_path(this.x, this.y, x, y)) {
       moved = true;
       justDoubleMoved = false;
     }
+    **/
   }
 
   public void en_passant(int x, int y) {
@@ -30,10 +32,9 @@ public class Pawn extends Piece{
     //if pawn moves up by 1 or 2
     else if ((y == this.y + 1) || (!moved && y == this.y + 2)) {
       //if new position isn't occupied
-      if (vertical_path(this.x, this.y, y, b)) {
+      if (vertical_path(this.x, this.y, y)) {
         justDoubleMoved = (y == this.y + 1) ? false : true;
-
-      atomic_move(x,y);
+        atomic_move(x, y);
       }
     } else {
       System.out.println("Pawns can't move like that on y-axis!");
