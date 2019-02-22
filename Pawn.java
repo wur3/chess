@@ -7,22 +7,27 @@ public class Pawn extends Piece{
   }
 
   public void capture(int x, int y) {
+    //pawn isn't moving to the left or right by 1 space
     if (x != this.x + 1 && x != this.x - 1) {
       System.out.println("Pawns can't move like that on x-axis!");
       System.out.println(String.format("(%d,%d) to (%d,%d)",this.x,this.y,x,y));
       return;
     }
+    //pawn isn't moving forward
     if (y != this.y + 1) {
       System.out.println("Pawns can't move like that on y-axis!");
       System.out.println(String.format("(%d,%d) to (%d,%d)",this.x,this.y,x,y));
       return;
     }
+    //movement requested is not diagonal
     if (!is_diagonal(this.x, this.y, x, y)) {
       System.out.println("Pawns have to capture diagonally.");
       System.out.println(String.format("(%d,%d) to (%d,%d)",this.x,this.y,x,y));
       return;
     }
-    else if (!diagonal_path(this.x, this.y, x, y)) {
+    //enemy piece is in the way
+    else if (!diagonal_path(this.x, this.y, x, y) && b.piece_at(x,y).getColor() != getColor()) {
+      b.clear(x, y);
       atomic_move(x, y);
     }
 

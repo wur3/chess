@@ -1,5 +1,3 @@
-import Java.lang.Math;
-
 public abstract class Piece {
   //instance variables
   protected Board b;
@@ -35,7 +33,7 @@ public abstract class Piece {
   }
 
   public String toString() {
-    return String.format("%s(%d,%d)",getClass(),x,y);
+    return String.format("%s(%d,%d): %s",getClass(),x,y,color);
   }
 
   //helper
@@ -48,7 +46,7 @@ public abstract class Piece {
     moved = true;
   }
 
-  @return whether the path from (x, y1) to (x, y2) is completely unoccupied (excluding the start point)
+  //@return whether the path from (x, y1) to (x, y2) is completely unoccupied (excluding the start point)
   protected boolean vertical_path(int x, int y1, int y2) {
     int inc = (y1 < y2) ? 1 : -1;
     for (int i = y1; i != y2; i += inc) {
@@ -60,7 +58,7 @@ public abstract class Piece {
     return true;
   }
 
-  @return whether the path from (x1, y) to (x2, y) is completely unoccupied (excluding the start point)
+  //@return whether the path from (x1, y) to (x2, y) is completely unoccupied (excluding the start point)
   protected boolean horizontal_path(int x1, int y, int x2) {
     int inc = (x1 < x2) ? 1 : -1;
     for (int i = x1; i != x2; i += inc) {
@@ -72,21 +70,21 @@ public abstract class Piece {
     return true;
   }
 
-  @return whether the diagonal path from (x1, y1) to (x2, y2) is completely unoccupied (excluding the start point)
+  //@return whether the diagonal path from (x1, y1) to (x2, y2) is completely unoccupied (excluding the start point)
   protected boolean diagonal_path(int x1, int y1, int x2, int y2) {
     int x_inc = (x1 < x2) ? 1 : -1;
     int y_inc = (y1 < y2) ? 1 : -1;
 
     for (int x_i = x1, y_i = y1; x_i <= x2; x_i += x_inc, y_i += y_inc) {
       if (b.occupied_at(x_i,y_i)) {  //fails if any square is occupied
-        System.out.println("Diagonal path blocked");
+        //System.out.println("Diagonal path blocked");
         return false;
       }
     }
     return true;
   }
 
-  @return whether (x1, y1) to (x2, y2) is a diagonal path
+  //@return whether (x1, y1) to (x2, y2) is a diagonal path
   protected boolean is_diagonal (int x1, int y1, int x2, int y2){
     if( Math.abs(x1 - x2) != Math.abs(y1 - y2)) { //not a diagonal path
       System.out.println("This path is not diagonal.");
