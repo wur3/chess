@@ -46,11 +46,11 @@ public abstract class Piece {
     moved = true;
   }
 
-  //@return whether the path from (x, y1) to (x, y2) is completely unoccupied (excluding the start point)
-  protected boolean vertical_path(int x, int y1, int y2) {
-    int inc = (y1 < y2) ? 1 : -1;
-    for (int i = y1; i != y2; i += inc) {
-      if (b.occupied_at(x,i)) {  //fails if any square is occupied
+  //@return whether the path from (this.x, this.y) to (this.x, y) is completely unoccupied (excluding the start point)
+  protected boolean vertical_path(int y) {
+    int inc = (this.y < y) ? 1 : -1;
+    for (int i = this.y; i != y; i += inc) {
+      if (b.occupied_at(this.x,i)) {  //fails if any square is occupied
         System.out.println("Path blocked");
         return false;
       }
@@ -58,11 +58,11 @@ public abstract class Piece {
     return true;
   }
 
-  //@return whether the path from (x1, y) to (x2, y) is completely unoccupied (excluding the start point)
-  protected boolean horizontal_path(int x1, int y, int x2) {
-    int inc = (x1 < x2) ? 1 : -1;
-    for (int i = x1; i != x2; i += inc) {
-      if (b.occupied_at(i,y)) {  //fails if any square is occupied
+  //@return whether the path from (this.x, this.y) to (x, this.y) is completely unoccupied (excluding the start point)
+  protected boolean horizontal_path(int x) {
+    int inc = (this.x < x) ? 1 : -1;
+    for (int i = this.x; i != x; i += inc) {
+      if (b.occupied_at(i,this.y)) {  //fails if any square is occupied
         System.out.println("Path blocked");
         return false;
       }
@@ -70,12 +70,12 @@ public abstract class Piece {
     return true;
   }
 
-  //@return whether the diagonal path from (x1, y1) to (x2, y2) is completely unoccupied (excluding the start point)
-  protected boolean diagonal_path(int x1, int y1, int x2, int y2) {
-    int x_inc = (x1 < x2) ? 1 : -1;
-    int y_inc = (y1 < y2) ? 1 : -1;
+  //@return whether the diagonal path from (this.x, this.y) to (x, y) is completely unoccupied (excluding the start point)
+  protected boolean diagonal_path(int x, int y) {
+    int x_inc = (this.x < x) ? 1 : -1;
+    int y_inc = (this.y < y) ? 1 : -1;
 
-    for (int x_i = x1, y_i = y1; x_i <= x2; x_i += x_inc, y_i += y_inc) {
+    for (int x_i = this.x, y_i = this.y; x_i <= x; x_i += x_inc, y_i += y_inc) {
       if (b.occupied_at(x_i,y_i)) {  //fails if any square is occupied
         //System.out.println("Diagonal path blocked");
         return false;
@@ -84,9 +84,9 @@ public abstract class Piece {
     return true;
   }
 
-  //@return whether (x1, y1) to (x2, y2) is a diagonal path
-  protected boolean is_diagonal (int x1, int y1, int x2, int y2){
-    if( Math.abs(x1 - x2) != Math.abs(y1 - y2)) { //not a diagonal path
+  //@return whether (this.x, this.y) to (x, y) is a diagonal path
+  protected boolean is_diagonal (int x, int y){
+    if( Math.abs(this.x - x) != Math.abs(this.y - y)) { //not a diagonal path
       System.out.println("This path is not diagonal.");
       return false;
     }

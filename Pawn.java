@@ -20,13 +20,13 @@ public class Pawn extends Piece{
       return;
     }
     //movement requested is not diagonal
-    if (!is_diagonal(this.x, this.y, x, y)) {
+    if (!is_diagonal(x, y)) {
       System.out.println("Pawns have to capture diagonally.");
       System.out.println(String.format("(%d,%d) to (%d,%d)",this.x,this.y,x,y));
       return;
     }
     //enemy piece is in the way
-    else if (!diagonal_path(this.x, this.y, x, y) && b.piece_at(x,y).getColor() != getColor()) {
+    else if (!diagonal_path(x, y) && b.piece_at(x,y).getColor() != getColor()) {
       b.clear(x, y);
       atomic_move(x, y);
     }
@@ -50,7 +50,7 @@ public class Pawn extends Piece{
     //if pawn moves up by 1 or 2
     else if ((y == this.y + 1) || (!moved && y == this.y + 2)) {
       //if new position isn't occupied
-      if (vertical_path(this.x, this.y, y)) {
+      if (vertical_path(y)) {
         justDoubleMoved = (y == this.y + 1) ? false : true;
         atomic_move(x, y);
       }
