@@ -33,7 +33,7 @@ public abstract class Piece {
   }
 
   public String toString() {
-    return String.format("%s(%d,%d): %s",getClass(),x,y,color);
+    return String.format("%s %s @(%d,%d)",color, String.valueOf(getClass()).substring(6), x, y);
   }
 
   //helper
