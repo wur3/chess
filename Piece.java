@@ -72,7 +72,7 @@ public abstract class Piece {
     for (int i = this.x + inc; i != x; i += inc) {
       //System.out.println("Checking " + i + "," + y);
       if (b.occupied_at(i,this.y)) {  //fails if any square is occupied
-        System.out.println("Horizontal path blocked at " + i + "," + y);
+        //System.out.println("Horizontal path blocked at " + i + "," + y);
         return false;
       }
     }
@@ -92,7 +92,7 @@ public abstract class Piece {
     for (int x_i = this.x + x_inc, y_i = this.y + y_inc; x_i != x; x_i += x_inc, y_i += y_inc) {
       //System.out.println("Checking " + x_i + "," + y_i);
       if (b.occupied_at(x_i,y_i)) {  //fails if any square is occupied
-        System.out.println("Diagonal path blocked at " + x_i + "," + y_i);
+        //System.out.println("Diagonal path blocked at " + x_i + "," + y_i);
         return false;
       }
     }
@@ -102,7 +102,7 @@ public abstract class Piece {
   //@return whether (this.x, this.y) to (x, y) is a diagonal path
   protected boolean is_diagonal (int x, int y){
     if( Math.abs(this.x - x) != Math.abs(this.y - y)) { //not a diagonal path
-      System.out.println("This path is not diagonal.");
+      //System.out.println("This path is not diagonal.");
       return false;
     }
     return true;
