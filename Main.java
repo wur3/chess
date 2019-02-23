@@ -2,30 +2,55 @@ public class Main {
 
   public static void main(String[] args) {
     Board board = new Board();
-    //board.print_xy();
 
-    /**
-    Pawn p1 = new Pawn(board,1,2,"black");
-    Pawn p2 = new Pawn(board, 2,3,"white");
-    System.out.println(board.piece_at(1,2));
-    System.out.println(board.piece_at(2,3));
-
-    p1.capture(2,3);
-    System.out.println(board.piece_at(1,2));
-    System.out.println(board.piece_at(2,3));
-    **/
     Piece white_pieces[] = new Piece[16];
-    for (int i = 0; i < Board.BOARD_WIDTH; i++) {
-      white_pieces[i] = new Pawn(board, i, 1, "white");
-      System.out.println(white_pieces[i].toString());
-    }
-
     Piece black_pieces[] = new Piece[16];
     for (int i = 0; i < Board.BOARD_WIDTH; i++) {
+      white_pieces[i] = new Pawn(board, i, 1, "white");
       black_pieces[i] = new Pawn(board, i, 6, "black");
-      System.out.println(black_pieces[i].toString());
+    }
+    for (int i = 0; i < Board.BOARD_WIDTH; i++) {
+      switch (i) {
+        case 0:
+          white_pieces[i + Board.BOARD_WIDTH] = new Rook(board, i, 0, "white");
+          black_pieces[i + Board.BOARD_WIDTH] = new Rook(board, i, 7, "black");
+          break;
+        case 1:
+          white_pieces[i + Board.BOARD_WIDTH] = new Knight(board, i, 0, "white");
+          black_pieces[i + Board.BOARD_WIDTH] = new Knight(board, i, 7, "black");
+          break;
+        case 2:
+          white_pieces[i + Board.BOARD_WIDTH] = new Bishop(board, i, 0, "white");
+          black_pieces[i + Board.BOARD_WIDTH] = new Bishop(board, i, 7, "black");
+          break;
+        case 3:
+          white_pieces[i + Board.BOARD_WIDTH] = new King(board, i, 0, "white");
+          black_pieces[i + Board.BOARD_WIDTH] = new King(board, i, 7, "black");
+          break;
+        case 4:
+          white_pieces[i + Board.BOARD_WIDTH] = new Queen(board, i, 0, "white");
+          black_pieces[i + Board.BOARD_WIDTH] = new Queen(board, i, 7, "black");
+          break;
+        case 5:
+          white_pieces[i + Board.BOARD_WIDTH] = new Bishop(board, i, 0, "white");
+          black_pieces[i + Board.BOARD_WIDTH] = new Bishop(board, i, 7, "black");
+          break;
+        case 6:
+          white_pieces[i + Board.BOARD_WIDTH] = new Knight(board, i, 0, "white");
+          black_pieces[i + Board.BOARD_WIDTH] = new Knight(board, i, 7, "black");
+          break;
+        case 7:
+          white_pieces[i + Board.BOARD_WIDTH] = new Rook(board, i, 0, "white");
+          black_pieces[i + Board.BOARD_WIDTH] = new Rook(board, i, 7, "black");
+          break;
+      }
     }
 
-
+    for (int i = 0; i < 16; i++) {
+      System.out.println(white_pieces[i].toString());
+    }
+    for (int i = 0; i < 16; i++) {
+      System.out.println(black_pieces[i].toString());
+    }
   }
 }
