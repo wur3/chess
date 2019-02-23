@@ -4,18 +4,40 @@ public class Rook extends Piece{
     super(b, x, y, color);
   }
 
-
-
   @Override
   public void move(int x, int y) {
-    if (this.x == x) {
-      this.y = y;
+    //horizontal moving
+    if ((this.x != x) && (this.y == y)) {
+      //targetted space is empty
+      if (horizontal_path(x, true)) {
+        atomic_move(x, y);
+        return;
+      }
+      //space is occupied by enemy
+      else if (horizontal_path(x, false) && b.piece_at(x,y).getColor() != color) {
+        b.clear(x, y);
+        atomic_move(x, y);
+        return;
+      }
     }
-    else if (this.y == y) {
-      this.x = x;
+    //vertical moving
+    else if ((this.x == x) && (this.y != y)) {
+      //targetted space is empty
+      if (vertical_path(y, true)) {
+        atomic_move(x, y);
+        return;
+      }
+      //space is occupied by enemy
+      else if (vertical_path(x, false) && b.piece_at(x,y).getColor() != color) {
+        b.clear(x, y);
+        atomic_move(x, y);
+        return;
+      }
+    }
+    else {
+      System.out.println("Rook cannot move like that!");
     }
     return;
   }
-
 
 }
