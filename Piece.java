@@ -47,11 +47,15 @@ public abstract class Piece {
   }
 
   //@return whether the path from (this.x, this.y) to (this.x, y) is completely unoccupied (excluding the start point)
-  protected boolean vertical_path(int y) {
+  protected boolean vertical_path(int y, boolean full) {
     int inc = (this.y < y) ? 1 : -1;
+    if (full) {
+      y += inc;
+    }
     for (int i = this.y + inc; i != y; i += inc) {
+      System.out.println("Checking " + i + "," + y);
       if (b.occupied_at(this.x,i)) {  //fails if any square is occupied
-        System.out.println("Path blocked");
+        System.out.println("Vertical path blocked at " + x + "," + i);
         return false;
       }
     }
@@ -59,11 +63,15 @@ public abstract class Piece {
   }
 
   //@return whether the path from (this.x, this.y) to (x, this.y) is completely unoccupied (excluding the start point)
-  protected boolean horizontal_path(int x) {
+  protected boolean horizontal_path(int x, boolean full) {
     int inc = (this.x < x) ? 1 : -1;
+    if (full) {
+      x += inc;
+    }
     for (int i = this.x + inc; i != x; i += inc) {
+      System.out.println("Checking " + i + "," + y);
       if (b.occupied_at(i,this.y)) {  //fails if any square is occupied
-        System.out.println("Path blocked");
+        System.out.println("Horizontal path blocked at " + i + "," + y);
         return false;
       }
     }
@@ -71,13 +79,19 @@ public abstract class Piece {
   }
 
   //@return whether the diagonal path from (this.x, this.y) to (x, y) is completely unoccupied (excluding the start point)
-  protected boolean diagonal_path(int x, int y) {
+  protected boolean diagonal_path(int x, int y, boolean full) {
     int x_inc = (this.x < x) ? 1 : -1;
     int y_inc = (this.y < y) ? 1 : -1;
 
-    for (int x_i = this.x + x_inc, y_i = this.y + y_inc; x_i <= x; x_i += x_inc, y_i += y_inc) {
+    if (full) {
+      x += x_inc;
+      y += y_inc;
+    }
+
+    for (int x_i = this.x + x_inc, y_i = this.y + y_inc; x_i < x; x_i += x_inc, y_i += y_inc) {
+      System.out.println("Checking " + x_i + "," + y_i);
       if (b.occupied_at(x_i,y_i)) {  //fails if any square is occupied
-        //System.out.println("Diagonal path blocked");
+        System.out.println("Diagonal path blocked at " + x_i + "," + y_i);
         return false;
       }
     }
