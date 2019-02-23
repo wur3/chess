@@ -36,6 +36,7 @@ public class Rook extends Piece{
     }
     else {
       System.out.println("Rook cannot move like that!");
+      System.out.println(String.format("(%d,%d) to (%d,%d)",this.x,this.y,x,y));
     }
     return;
   }
