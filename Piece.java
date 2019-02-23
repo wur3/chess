@@ -52,8 +52,9 @@ public abstract class Piece {
     if (full) {
       y += inc;
     }
+
     for (int i = this.y + inc; i != y; i += inc) {
-      System.out.println("Checking " + i + "," + y);
+      //System.out.println("Checking " + x + "," + i);
       if (b.occupied_at(this.x,i)) {  //fails if any square is occupied
         System.out.println("Vertical path blocked at " + x + "," + i);
         return false;
@@ -88,7 +89,7 @@ public abstract class Piece {
       y += y_inc;
     }
 
-    for (int x_i = this.x + x_inc, y_i = this.y + y_inc; x_i < x; x_i += x_inc, y_i += y_inc) {
+    for (int x_i = this.x + x_inc, y_i = this.y + y_inc; x_i != x; x_i += x_inc, y_i += y_inc) {
       //System.out.println("Checking " + x_i + "," + y_i);
       if (b.occupied_at(x_i,y_i)) {  //fails if any square is occupied
         System.out.println("Diagonal path blocked at " + x_i + "," + y_i);
