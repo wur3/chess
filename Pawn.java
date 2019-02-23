@@ -26,9 +26,10 @@ public class Pawn extends Piece{
       return;
     }
     //enemy piece is in the way
-    else if (!diagonal_path(x, y) && b.piece_at(x,y).getColor() != getColor()) {
+    else if (!diagonal_path(x, y, true) && b.piece_at(x,y).getColor() != getColor()) {
       b.clear(x, y);
       atomic_move(x, y);
+      return;
     }
 
   }
@@ -50,7 +51,7 @@ public class Pawn extends Piece{
     //if pawn moves up by 1 or 2
     else if ((y == this.y + 1) || (!moved && y == this.y + 2)) {
       //if new position isn't occupied
-      if (vertical_path(y)) {
+      if (vertical_path(y, true)) {
         justDoubleMoved = (y == this.y + 1) ? false : true;
         atomic_move(x, y);
       }
