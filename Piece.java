@@ -49,7 +49,7 @@ public abstract class Piece {
   //@return whether the path from (this.x, this.y) to (this.x, y) is completely unoccupied (excluding the start point)
   protected boolean vertical_path(int y) {
     int inc = (this.y < y) ? 1 : -1;
-    for (int i = this.y; i != y; i += inc) {
+    for (int i = this.y + inc; i != y; i += inc) {
       if (b.occupied_at(this.x,i)) {  //fails if any square is occupied
         System.out.println("Path blocked");
         return false;
@@ -61,7 +61,7 @@ public abstract class Piece {
   //@return whether the path from (this.x, this.y) to (x, this.y) is completely unoccupied (excluding the start point)
   protected boolean horizontal_path(int x) {
     int inc = (this.x < x) ? 1 : -1;
-    for (int i = this.x; i != x; i += inc) {
+    for (int i = this.x + inc; i != x; i += inc) {
       if (b.occupied_at(i,this.y)) {  //fails if any square is occupied
         System.out.println("Path blocked");
         return false;
@@ -75,7 +75,7 @@ public abstract class Piece {
     int x_inc = (this.x < x) ? 1 : -1;
     int y_inc = (this.y < y) ? 1 : -1;
 
-    for (int x_i = this.x, y_i = this.y; x_i <= x; x_i += x_inc, y_i += y_inc) {
+    for (int x_i = this.x + x_inc, y_i = this.y + y_inc; x_i <= x; x_i += x_inc, y_i += y_inc) {
       if (b.occupied_at(x_i,y_i)) {  //fails if any square is occupied
         //System.out.println("Diagonal path blocked");
         return false;
