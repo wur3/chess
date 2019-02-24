@@ -28,14 +28,22 @@ public class Test {
     b1.move(2,2);
     System.out.println(board.piece_at(1,1));
     System.out.println(board.piece_at(2,2));
-    **/
 
-    Knight k1 = new Knight(board,1,1,"white");
-    Knight k2 = new Knight(board,2,3,"black");
+    King k1 = new King(board,1,1,"white");
+    Knight k2 = new Knight(board,0,2,"black");
     System.out.println(board.piece_at(1,1));
-    System.out.println(board.piece_at(2,3));
-    k1.move(2,3);
+    System.out.println(board.piece_at(0,2));
+    k1.move(0,2);
     System.out.println(board.piece_at(1,1));
-    System.out.println(board.piece_at(2,3));
+    System.out.println(board.piece_at(0,2));
+    **/
+    Queen q1 = new Queen(board,4,4,"white");
+    Bishop b1 = new Bishop(board,7,7,"white");
+    System.out.println(board.piece_at(4,4));
+    System.out.println(board.piece_at(7,7));
+    q1.move(7,7);
+
+    System.out.println(board.piece_at(4,4));
+    System.out.println(board.piece_at(7,7));
   }
 }
