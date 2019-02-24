@@ -1,8 +1,14 @@
+import javax.swing.JFrame;
+
 public class Main {
 
   public static void main(String[] args) {
     Board board = new Board();
-
+    JFrame window = new JFrame();
+    window.add(new ChessPanel());
+    window.pack();
+    window.setVisible(true);
+/**
     Piece white_pieces[] = new Piece[16];
     Piece black_pieces[] = new Piece[16];
     for (int i = 0; i < Board.BOARD_WIDTH; i++) {
@@ -52,5 +58,6 @@ public class Main {
     for (int i = 0; i < 16; i++) {
       System.out.println(black_pieces[i].toString());
     }
+    **/
   }
 }
