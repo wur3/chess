@@ -1,4 +1,5 @@
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Color;
@@ -62,8 +63,8 @@ public class ChessPanel extends JPanel{
 
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
+    //draw chessboard pattern
     for (int i = 0; i < 8; i++) {
-
       for (int j = 0; j < 8; j++) {
         if ((i+j)%2 == 1) {
           g.setColor(Color.BLACK);
@@ -76,5 +77,9 @@ public class ChessPanel extends JPanel{
       }
     }
 
+    //draw chess pieces
+    //ImageIcon icon = createImageIcon("images/middle.gif", "chess_piece");
+    //label1 = new JLabel("U+2654", icon, JLabel.CENTER);
+    
   }
 }
