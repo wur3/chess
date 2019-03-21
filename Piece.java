@@ -32,6 +32,10 @@ public abstract class Piece {
     return color;
   }
 
+  public String getType() {
+    return String.valueOf(getClass()).substring(6);
+  }
+
   public String toString() {
     return String.format("%s %s @(%d,%d)",color, String.valueOf(getClass()).substring(6), x, y);
   }
