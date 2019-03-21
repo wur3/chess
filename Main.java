@@ -7,10 +7,12 @@ public class Main {
 
   public static void main(String[] args) {
     Board board = new Board();
-    JFrame window = new JFrame();
-    window.add(new ChessPanel());
+
+    JFrame window = new JFrame("Chess Time");
+    window.add(new ChessPanel(board));
     window.pack();
     window.setVisible(true);
+    board.print_pieces();
 
   }
 }

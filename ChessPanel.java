@@ -1,64 +1,23 @@
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 public class ChessPanel extends JPanel{
-  public ChessPanel() {
+
+  private BufferedImage image;
+  private Board board;
+
+  public ChessPanel(Board b) {
+    board = b;
     setPreferredSize(new Dimension(Main.X_DIMENSION,Main.Y_DIMENSION));
 
-  /**
-      Piece white_pieces[] = new Piece[16];
-      Piece black_pieces[] = new Piece[16];
-      for (int i = 0; i < Board.BOARD_WIDTH; i++) {
-        white_pieces[i] = new Pawn(board, i, 1, "white");
-        black_pieces[i] = new Pawn(board, i, 6, "black");
-      }
-      for (int i = 0; i < Board.BOARD_WIDTH; i++) {
-        switch (i) {
-          case 0:
-            white_pieces[i + Board.BOARD_WIDTH] = new Rook(board, i, 0, "white");
-            black_pieces[i + Board.BOARD_WIDTH] = new Rook(board, i, 7, "black");
-            break;
-          case 1:
-            white_pieces[i + Board.BOARD_WIDTH] = new Knight(board, i, 0, "white");
-            black_pieces[i + Board.BOARD_WIDTH] = new Knight(board, i, 7, "black");
-            break;
-          case 2:
-            white_pieces[i + Board.BOARD_WIDTH] = new Bishop(board, i, 0, "white");
-            black_pieces[i + Board.BOARD_WIDTH] = new Bishop(board, i, 7, "black");
-            break;
-          case 3:
-            white_pieces[i + Board.BOARD_WIDTH] = new King(board, i, 0, "white");
-            black_pieces[i + Board.BOARD_WIDTH] = new King(board, i, 7, "black");
-            break;
-          case 4:
-            white_pieces[i + Board.BOARD_WIDTH] = new Queen(board, i, 0, "white");
-            black_pieces[i + Board.BOARD_WIDTH] = new Queen(board, i, 7, "black");
-            break;
-          case 5:
-            white_pieces[i + Board.BOARD_WIDTH] = new Bishop(board, i, 0, "white");
-            black_pieces[i + Board.BOARD_WIDTH] = new Bishop(board, i, 7, "black");
-            break;
-          case 6:
-            white_pieces[i + Board.BOARD_WIDTH] = new Knight(board, i, 0, "white");
-            black_pieces[i + Board.BOARD_WIDTH] = new Knight(board, i, 7, "black");
-            break;
-          case 7:
-            white_pieces[i + Board.BOARD_WIDTH] = new Rook(board, i, 0, "white");
-            black_pieces[i + Board.BOARD_WIDTH] = new Rook(board, i, 7, "black");
-            break;
-        }
-      }
-
-      for (int i = 0; i < 16; i++) {
-        System.out.println(white_pieces[i].toString());
-      }
-      for (int i = 0; i < 16; i++) {
-        System.out.println(black_pieces[i].toString());
-      }
-      **/
   }
 
   protected void paintComponent(Graphics g) {
@@ -67,19 +26,29 @@ public class ChessPanel extends JPanel{
     for (int i = 0; i < 8; i++) {
       for (int j = 0; j < 8; j++) {
         if ((i+j)%2 == 1) {
-          g.setColor(Color.BLACK);
+          // g.setColor(Color.BLACK);
+          g.setColor(Color.decode("#FFFACD"));
         }
         else {
-          g.setColor(Color.WHITE);
+          // g.setColor(Color.WHITE);
+          g.setColor(Color.decode("#593E1A"));
         }
 
-        g.fillRect(j*Main.X_DIMENSION/8,(8-1-i)*Main.Y_DIMENSION/8, Main.X_DIMENSION/8, Main.Y_DIMENSION/8);
+        g.fillRect(i*Main.X_DIMENSION/8, (8-1-j)*Main.Y_DIMENSION/8, Main.X_DIMENSION/8, Main.Y_DIMENSION/8);
+
+        if (board.occupied_at(i, j)) {
+          String image_path = "images/" + String.valueOf(board.piece_at(i, j).getType().toLowerCase()
+          + board.piece_at(i, j).getColor().charAt(0) + ".gif");
+          try {
+            image = ImageIO.read(new File(image_path));
+          } catch(final IOException e) {
+              System.out.println("Cannot find: images/" + image_path);
+          }
+          g.drawImage(image, i*Main.X_DIMENSION/8, (8-1-j)*Main.Y_DIMENSION/8, Main.X_DIMENSION/8, Main.Y_DIMENSION/8, this);
+        }
       }
     }
 
-    //draw chess pieces
-    //ImageIcon icon = createImageIcon("images/middle.gif", "chess_piece");
-    //label1 = new JLabel("U+2654", icon, JLabel.CENTER);
-    
+
   }
 }
